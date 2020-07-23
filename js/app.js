@@ -35,3 +35,26 @@ promise2.then(
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+// Task 2
+
+const task2 = document.querySelector('.task2');
+
+let promise3 = new Promise((resolve, reject) => {
+    let randomNumber = getRandomInt(1, 10);
+    setTimeout(() => {
+        if (randomNumber % 2 == 0) resolve('Successfully');
+        else reject(new Error('Failed'));
+    }, 5000);
+});
+
+promise3.then(
+        result => {
+            task2.textContent = result;
+        }
+    )
+    .catch(
+        error => {
+            task2.textContent = error;
+        }
+    );
