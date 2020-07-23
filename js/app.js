@@ -58,3 +58,39 @@ promise3.then(
             task2.textContent = error;
         }
     );
+
+
+//Task 3 ------------------------------------------------
+// Сделайте цепочку из трех промисов. Пусть первый промис возвращает число. Сделайте так, чтобы каждый последующий промис через 3 секунды возводил в квадрат результат предыдущего промиса. После окончания манипуляций выведите число алертом на экран.
+const task3 = document.querySelector('.task3');
+
+function powNumber(num) {
+    return new Promise((resolve) => {
+        task3.textContent = num;
+        resolve(num);
+    });
+}
+
+powNumber(4)
+    .then(
+        num => new Promise((resolve) => { // возвели 4 в квадрат через 3 с.
+            setTimeout(() => {
+                num = Math.pow(num, 2);
+                task3.textContent = num;
+                resolve(num);
+            }, 3000);
+        })
+    )
+    .then(
+        num => new Promise((resolve) => { // возвели 16 в квадрат через 3 с.
+            setTimeout(() => {
+                num = Math.pow(num, 2);
+                resolve(num);
+            }, 3000);
+        })
+    )
+    .then(
+        num => { // уже ничего не делаем, отдаём результат
+            task3.textContent = num;
+        }
+    );
