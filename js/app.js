@@ -93,4 +93,8 @@ powNumber(4)
         num => { // уже ничего не делаем, отдаём результат
             task3.textContent = num;
         }
+    ).catch(
+        (err) => {
+            console.warn(err);
+        }
     );
