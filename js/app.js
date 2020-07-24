@@ -98,3 +98,37 @@ powNumber(4)
             console.warn(err);
         }
     );
+
+
+//Task 4 ------------------------------------------------
+// Сделайте 3 промиса, в каждом из которых расположена функция setTimeout со случайно задержкой от 1 до 5 секунд. Пусть каждый промис своим результатом возвращает эту задержку. С помощью Promise.all получите массив результатов, найдите его сумму, выведите на экран.
+const task4 = document.querySelector('.task4');
+
+const prom4_1 = new Promise((resolve, reject) => {
+    let delay = getRandomInt(1, 5);
+    setTimeout(() => {
+        resolve(delay);
+    }, delay  * 1000);     
+});
+const prom4_2 = new Promise((resolve, reject) => {
+    let delay = getRandomInt(1, 5);
+    setTimeout(() => {
+        resolve(delay);
+    }, delay  * 1000);
+});
+const prom4_3 = new Promise((resolve, reject) => {
+    let delay = getRandomInt(1, 5);
+    setTimeout(() => {
+        resolve(delay);
+    }, delay  * 1000);
+});
+
+const result4 = Promise.all([prom4_1, prom4_2, prom4_3]).then(
+    arr => {
+        let delaySumm = arr.reduce((value, elem) => {
+            return value += elem;
+        }, 0);
+        task4.textContent = `Исходный массив: [${arr}], сумма: ${delaySumm}`;
+    }
+);
+
