@@ -132,3 +132,31 @@ const result4 = Promise.all([prom4_1, prom4_2, prom4_3]).then(
     }
 );
 
+//Task 5 ------------------------------------------------
+// Сделайте 3 промиса, в каждом из которых расположена функция setTimeout со случайно задержкой от 1 до 5 секунд. Пусть первый промис возвращает число 1, второй - число 2, третий - число 3. С помощью Promise.race дождитесь загрузки первого сработавшего промиса и выведите результат его работы на экран.
+const task5 = document.querySelector('.task5');
+
+const prom5_1 = new Promise((resolve) => {
+    let delay = getRandomInt(1, 5);
+    setTimeout(() => {
+        resolve(1);
+    }, delay * 1000);
+});
+const prom5_2 = new Promise((resolve) => {
+    let delay = getRandomInt(1, 5);
+    setTimeout(() => {
+        resolve(2);
+    }, delay * 1000);
+});
+const prom5_3 = new Promise((resolve) => {
+    let delay = getRandomInt(1, 5);
+    setTimeout(() => {
+        resolve(3);
+    }, delay * 1000);
+});
+
+const result5 = Promise.race([prom5_1, prom5_2, prom5_3]).then(
+    value => {
+        task5.textContent = `Первым выполнился promise № ${value}`;
+    }
+);
