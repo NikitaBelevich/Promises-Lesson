@@ -160,3 +160,23 @@ const result5 = Promise.race([prom5_1, prom5_2, prom5_3]).then(
         task5.textContent = `Первым выполнился promise № ${value}`;
     }
 );
+
+//Task 6 ------------------------------------------------
+// Сделайте функцию getNum, которая возвращает промис, который с задержкой в 3 секунды выведет случайное число от 1 до 5. Создайте async функцию, которая с помощью await будет дожидаться результата getNum, затем возводить его в квадрат и выводить на экран.
+const task6 = document.querySelector('.task6');
+
+function getNum() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const randomNum = getRandomInt(1, 5);
+            resolve(randomNum);
+        }, 3000);
+    });
+}
+
+
+waitGetNum();
+async function waitGetNum() {
+    let randomNum = await getNum(); // ждём 3 секунды пока промис выполнится и вернёт случайное число
+    task6.textContent = `Случайное число ${randomNum} в квадрате: ${randomNum ** 2}`;
+}
