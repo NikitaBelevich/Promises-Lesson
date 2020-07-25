@@ -180,3 +180,24 @@ async function waitGetNum() {
     let randomNum = await getNum(); // ждём 3 секунды пока промис выполнится и вернёт случайное число
     task6.textContent = `Случайное число ${randomNum} в квадрате: ${randomNum ** 2}`;
 }
+
+//Task 7 ------------------------------------------------
+// Сделайте функцию getNum1, которая возвращает промис, который с задержкой в 3 секунды выведет случайное число от 1 до 5. Сделайте также функцию getNum2, которая возвращает промис, который с задержкой в 5 секунд выведет случайное число от 6 до 10. Создайте async функцию, которая с помощью await будет дожидаться результата getNum1, затем будет дожидаться результата getNum2, а затем найдет сумму полученных чисел и выведет на экран.
+const task7 = document.querySelector('.task7');
+
+function getNum2() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const randomNum = getRandomInt(6, 10);
+            resolve(randomNum);
+        }, 5000);
+    });
+}
+
+waitGetNum2();
+async function waitGetNum2() {
+    // const rNum1 = Promise.all([getNum(), getNum2()]).then(arr => console.log(arr));
+    const arrNumbersRand = await Promise.all([getNum(), getNum2()]);
+    const summRandNum = arrNumbersRand.reduce((accum, elem) => accum += elem, 0);
+    task7.textContent = `Случайные числа [${arrNumbersRand}], их сумма: ${summRandNum}`;
+}
