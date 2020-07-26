@@ -201,3 +201,39 @@ async function waitGetNum2() {
     const summRandNum = arrNumbersRand.reduce((accum, elem) => accum += elem, 0);
     task7.textContent = `Случайные числа [${arrNumbersRand}], их сумма: ${summRandNum}`;
 }
+
+//Task 8 ------------------------------------------------
+// Даны 3 картинки. С помощью Promise.all дождитесь окончания загрузки всех картинок и выведите их на экран.
+const task8 = document.querySelector('.task8');
+const imagesData = [
+    'http://pngimg.com/uploads/macaron/macaron_PNG119.png',
+    'http://pngimg.com/uploads/honey/honey_PNG86357.png',
+    'http://pngimg.com/uploads/donut/donut_PNG26.png',
+];
+
+function loadImg(url) {
+    return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.src = url;
+
+        image.onload = () => resolve(image); // В случае загрузки, отдаём картинку
+        image.onerror = () => reject(new Error(`Invalid url: ${url}`)); // В случае ошибки загрузки, передаём ошибку
+    });
+}
+
+// Самовызывающаяся функция
+( async () => {
+    try {
+        // Дожидаемся загрузки картинок, в случае успеха, вставляем на страницу
+        // Для каждого url создали промис и возвратили все промисы в виде массива
+        // Затем дожидаемся выполнения Promise.all и получаем массив картинок
+        let uploadedImages = await Promise.all(imagesData.map(urlImg => {return loadImg(urlImg)}));
+        // Вставляем все загруженные картинки на страницу
+        uploadedImages.forEach(image => {
+            task8.append(image);
+        });
+    } catch (err) {
+        // Если загрузка не удалась, выводим в консоль сообщение
+        console.error(err.message);
+    }
+})();
